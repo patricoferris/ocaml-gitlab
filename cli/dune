@@ -1,8 +1,18 @@
 (rule
  (copy config.ml.in config.ml))
 
-(executables
+(executable
  (libraries cohttp-lwt-unix gitlab_unix cmdliner)
  (package gitlab-unix)
- (public_names lab)
- (names lab))
+ (modules lab config)
+ (public_name lab)
+ (name lab))
+
+(rule
+ (copy config.ml.in config_js.ml))
+
+(executable
+ (name lab_jsoo)
+ (modules lab_jsoo config_js)
+ (libraries cohttp-lwt-jsoo gitlab_jsoo cmdliner)
+ (modes js))
